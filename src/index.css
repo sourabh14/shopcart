@@ -12,13 +12,39 @@ code {
     monospace;
 }
 
+.cart-item {
+  display: inline-flex;
+  margin: 20px 10px;
+}
+
+.cart-item .right-block {
+  padding: 0 20px;
+}
+
+.cart-item-actions {
+  margin-top: 8px;
+}
+
+.action-icons {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+.action-icons:hover {
+  cursor: pointer;
+}
+
+
+
+/*  PRODUCT
 .card {
   box-shadow: 0px 0px 15px grey;
   border-radius: 10px;
   margin: 40px;
 }
 
-.cart-item {
+.product-container {
   width: 12rem;
 }
 
@@ -28,7 +54,7 @@ code {
   color: #403c3c;
 }
 
-.cart-item-price {
+.product-price {
   color: #970000;
   font-weight: bold;
   font-size: 1rem;
@@ -37,4 +63,4 @@ code {
 
 .btn-sm {
   padding: 0.1rem 0.1rem;
-}
+}  */
