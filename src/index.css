@@ -40,6 +40,16 @@ code {
   cursor: pointer;
 }
 
+.shopcart-navbar {
+  display: flex;
+}
+
+.shopcart-navbar img {
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+}
+
 
 
 /*  PRODUCT

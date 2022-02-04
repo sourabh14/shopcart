@@ -1,46 +1,26 @@
 import React from 'react';
 
-class CartItem extends React.Component {
-    constructor (props) {
-        super(props);
-        this.state = props.product;
-    }
+const CartItem = (props) => {
+    const {price, title, qty} = props.product;
 
-    increaseQuantity = () => {
-        this.setState({
-            qty: this.state.qty + 1
-        });
-    }
-
-    decreaseQuantity = () => {
-        if (this.state.qty > 0) {
-            this.setState({
-                qty: this.state.qty - 1
-            });
-        }
-    }
-
-    render() {
-        const {price, title, qty} = this.state;
-        return (
-            <div className="cart-item">
-                <div className="left-block">
-                <img src="images/galaxy-m31.jpg" style={styles.image} />
-                </div>
-                <div className="right-block">
-                <div style={ { fontSize: 25 } }>{title}</div>
-                <div style={ { color: '#777' } }>Rs {price} </div>
-                <div style={ { color: '#777' } }>Qty: {qty} </div>
-                <div className="cart-item-actions">
-                    {/* Buttons */}
-                    <img alt="increase" className="action-icons" onClick={this.increaseQuantity} src="images/increase.png" />
-                    <img alt="decrease" className="action-icons" onClick={this.decreaseQuantity} src="images/decrease.png" />
-                    <img alt="delete" className="action-icons" src="images/delete.png" />
-                </div>
-                </div>
+    return (
+        <div className="cart-item">
+            <div className="left-block">
+            <img src="images/galaxy-m31.jpg" style={styles.image} />
             </div>
-        );
-    }
+            <div className="right-block">
+            <div style={ { fontSize: 25 } }>{title}</div>
+            <div style={ { color: '#777' } }>Rs {price} </div>
+            <div style={ { color: '#777' } }>Qty: {qty} </div>
+            <div className="cart-item-actions">
+                {/* Buttons */}
+                <img alt="increase" className="action-icons" onClick={() => {props.increaseQuantity(props.product)}} src="images/increase.png" />
+                <img alt="decrease" className="action-icons" onClick={() => {props.decreaseQuantity(props.product)}} src="images/decrease.png" />
+                <img alt="delete" className="action-icons" onClick={() => {props.removeProduct(props.product)}} src="images/delete.png" />
+            </div>
+            </div>
+        </div>
+    );
 }
 
 const styles = {

@@ -1,50 +1,23 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-class Cart extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            products : [
-                {
-                    title: 'Mobile phone',
-                    qty: 1,
-                    price: 999,
-                    img: "",
-                    id: 1
-                },
-                {
-                    title: 'Laptop',
-                    qty: 1,
-                    price: 1999,
-                    img: "",
-                    id: 2
-                },
-                {
-                    title: 'T shirt',
-                    qty: 1,
-                    price: 400,
-                    img: "",
-                    id: 3
-                }
-            ]
-        };
-    }
-
-
-    render() {
-        const products = this.state.products;
-        return (
-            <div className="cart">
-                {
-                    products.map((product) => {
-                       return <CartItem product={product} key={product.id} />
-                    })
-                }
-            </div>
-        );
-    }
+const Cart = (props) => {
+    const {products} = props;
+    return (
+        <div className="cart">
+            {
+                products.map((product) => {
+                    return <CartItem 
+                        product={product} 
+                        key={product.id} 
+                        increaseQuantity={props.increaseQuantity} 
+                        decreaseQuantity={props.decreaseQuantity}
+                        removeProduct={props.removeProduct}
+                    />
+                })
+            }
+        </div>
+    );
 }
 
 export default Cart;
