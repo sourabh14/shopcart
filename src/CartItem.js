@@ -1,14 +1,9 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor () {
-        super();
-        this.state = {
-          price: 999,
-          title: 'Mobile Phone',
-          qty: 1,
-          img: ''
-        }
+    constructor (props) {
+        super(props);
+        this.state = props.product;
     }
 
     increaseQuantity = () => {
