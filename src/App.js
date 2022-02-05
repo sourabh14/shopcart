@@ -1,34 +1,45 @@
 import React from "react";
 import Cart from "./Cart";
 import Navbar from "./Navbar"
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBWUs0myM5bVkyOqqf8NJ2Do1tEDRZhYX0",
+    authDomain: "cart-7c6e0.firebaseapp.com",
+    projectId: "cart-7c6e0",
+    storageBucket: "cart-7c6e0.appspot.com",
+    messagingSenderId: "62565167502",
+    appId: "1:62565167502:web:8174d1d0c4b7bcc035b4df"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Get a list of products from database
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            products: [{
-                    title: 'Mobile phone',
-                    qty: 1,
-                    price: 999,
-                    img: "",
-                    id: 1
-                },
-                {
-                    title: 'Laptop',
-                    qty: 1,
-                    price: 1999,
-                    img: "",
-                    id: 2
-                },
-                {
-                    title: 'T shirt',
-                    qty: 1,
-                    price: 400,
-                    img: "",
-                    id: 3
-                }
-            ]
+            products: []
         }
+    }
+
+    async componentDidMount() {
+        // Fetch products from database
+        const productsCol = collection(db, 'products');
+        const productSnapshot = await getDocs(productsCol);
+        const productList = productSnapshot.docs.map(doc => {
+            const docData = doc.data();
+            docData['id'] = doc.id;
+            return docData
+        });
+        this.setState({
+            products: productList
+        })
     }
 
     getTotalItems = () => {
@@ -83,23 +94,23 @@ class App extends React.Component {
     }
 
     render() {
-      const {products} = this.state;
+        const {products} = this.state;
 
-      return ( 
-        <div className = "App">
-            <h1>ShopCart</h1>
-            <Navbar 
-              totalItems={this.getTotalItems()}
-            />
-            <Cart 
-              products={products} 
-              increaseQuantity={this.increaseQuantity} 
-              decreaseQuantity={this.decreaseQuantity}
-              removeProduct={this.removeProduct}
-             />
-             <div>Total Price: {this.getTotalCost()}</div>
-        </div>
-      );
+        return ( 
+            <div className = "App">
+                <h1>ShopCart</h1>
+                <Navbar 
+                totalItems={this.getTotalItems()}
+                />
+                <Cart 
+                products={products} 
+                increaseQuantity={this.increaseQuantity} 
+                decreaseQuantity={this.decreaseQuantity}
+                removeProduct={this.removeProduct}
+                />
+                <div>Total Price: {this.getTotalCost()}</div>
+            </div>
+        );
     }
 }
 
