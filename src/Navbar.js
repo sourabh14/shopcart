@@ -3,6 +3,7 @@ import React from 'react';
 const Navbar = (props) => {
   return (
     <div style={styles.nav}>
+      <div style={styles.title}>ShopCart</div>
       <div style={styles.cartIconContainer}>
         <img style={styles.cartIcon} src="images/shopping-cart.png" alt="cart-icon" />
         <span style={styles.cartCount}>{props.totalItems}</span>
@@ -12,6 +13,7 @@ const Navbar = (props) => {
 }
 
 const styles = {
+  title: {"fontSize":"2rem","fontWeight":"bold","color":"white","marginLeft":"auto"},
   cartIcon: {
     height: 32,
     marginRight: 20
@@ -20,19 +22,19 @@ const styles = {
     height: 70,
     background: '#4267b2',
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   cartIconContainer: {
-    position: 'relative'
+    marginLeft: 'auto'
   },
   cartCount: {
     background: 'yellow',
     borderRadius: '50%',
     padding: '4px 8px',
     position: 'absolute',
-    right: 0,
-    top: -9
+    right: 5,
+    top: 6
   }
 };
 
